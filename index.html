@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aryan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213d; --ink-soft:#3d4a66; --muted:#6b7590;
+    --paper:#fbf8f2; --card:#ffffff; --line:#e7e1d4;
+    --accent:#e07a3f; --accent-soft:#fbe7da; --sky:#dfe9f5; --night:#0f1a33;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.65}
+  img{max-width:100%;display:block}
+  a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+  h2{font-size:clamp(28px,4vw,38px);margin-bottom:8px}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:720px}
+
+  /* Hero */
+  .hero{background:radial-gradient(1200px 500px at 85% -10%,#24365f 0%,transparent 60%),var(--night);color:#fff;padding:80px 0 72px;position:relative;overflow:hidden}
+  .stars{position:absolute;inset:0;pointer-events:none;opacity:.55}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center;position:relative}
+  .hero h1{font-size:clamp(48px,8vw,88px);font-weight:700;letter-spacing:-.01em}
+  .hero .role{font-size:20px;color:#c9d4ea;margin:14px 0 28px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px}
+  .tag{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;font-size:14px;color:#e6ecf7}
+  blockquote.motto{margin:0;padding:18px 22px;border-left:4px solid var(--accent);background:rgba(255,255,255,.06);border-radius:0 12px 12px 0;font-family:Fraunces,Georgia,serif;font-size:24px;line-height:1.35}
+  blockquote.motto cite{display:block;font-family:Inter,sans-serif;font-style:normal;font-size:14px;color:#aebbd6;margin-top:8px}
+  .portrait{border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:rotate(1.5deg);border:6px solid #fff}
+  .portrait img{aspect-ratio:4/5;object-fit:cover;width:100%}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:28px}
+  .traits{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .trait{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .trait b{display:block;font-family:Fraunces,serif;font-size:18px;margin-bottom:2px}
+  .trait span{color:var(--muted);font-size:15px}
+  .interests{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .chip{background:var(--sky);border-radius:999px;padding:8px 16px;font-weight:500;font-size:15px}
+
+  /* Projects */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column}
+  .card.feature{grid-column:span 2;background:linear-gradient(135deg,#fff 0%,var(--accent-soft) 100%)}
+  .card .num{font-family:Fraunces,serif;font-size:14px;color:var(--accent);font-weight:600;margin-bottom:10px}
+  .card h3{font-size:24px;margin-bottom:8px}
+  .card p{margin:0 0 16px;color:var(--ink-soft)}
+  .card .links{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px}
+  .btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:9px 16px;border-radius:10px;font-size:14px;font-weight:600}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  .badge{display:inline-block;background:var(--ink);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;margin-bottom:12px;align-self:flex-start}
+
+  /* Oxford */
+  .ox{background:var(--night);color:#fff;border-top:none}
+  .ox .lead{color:#c9d4ea}
+  .ox a{color:#fff}
+  .gallery{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;gap:14px;margin-top:34px}
+  .gallery figure{margin:0;border-radius:14px;overflow:hidden;position:relative;background:#1c2a4d}
+  .gallery img{width:100%;height:100%;object-fit:cover}
+  .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+  .g1{grid-column:span 2;grid-row:span 3}
+  .g2{grid-column:span 4;grid-row:span 2}
+  .g3{grid-column:span 2;grid-row:span 2}
+  .g4{grid-column:span 2;grid-row:span 2}
+  .g5{grid-column:span 2;grid-row:span 2}
+  .g6{grid-column:span 4;grid-row:span 1}
+  .g6 img{object-position:center 35%}
+  .g5 img{object-position:center 30%}
+  .note-quote{margin-top:36px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:rgba(255,255,255,.06);border-radius:16px;padding:22px 26px}
+  .note-quote .big{font-family:Fraunces,serif;font-size:26px;line-height:1.3}
+  .note-quote small{color:#aebbd6;font-size:14px}
+  .star{font-size:34px}
+
+  /* Learning + support */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+  .panel h3{font-size:22px;margin-bottom:12px}
+  .panel ul{margin:0;padding-left:0;list-style:none}
+  .panel li{padding:10px 0 10px 34px;position:relative;border-bottom:1px dashed var(--line)}
+  .panel li:last-child{border-bottom:none}
+  .panel li::before{content:"";position:absolute;left:4px;top:17px;width:14px;height:14px;border-radius:4px;background:var(--accent)}
+  .subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .subject{background:var(--sky);border-radius:12px;padding:16px;text-align:center;font-weight:600}
+  .subject small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+  .trust{background:var(--accent-soft);border-radius:18px;padding:30px;margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+  .trust .icon{width:64px;height:64px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:30px}
+  .trust p{margin:0;font-size:18px}
+
+  /* Goals */
+  .goals{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+  .goal{border-top:4px solid var(--ink);padding-top:16px}
+  .goal h3{font-size:21px;margin-bottom:6px}
+  .goal p{margin:0;color:var(--ink-soft)}
+
+  footer{background:var(--night);color:#c9d4ea;padding:56px 0;text-align:center}
+  footer .motto-foot{font-family:Fraunces,serif;font-size:clamp(26px,4vw,40px);color:#fff;margin-bottom:10px}
+
+  @media (max-width:860px){
+    .hero-grid,.about-grid,.two{grid-template-columns:1fr}
+    .portrait{max-width:340px;margin:0 auto}
+    .cards,.goals{grid-template-columns:1fr}
+    .card.feature{grid-column:auto}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+    .gallery figure{grid-column:span 1 !important;grid-row:span 1 !important}
+    .gallery .g2{grid-column:span 2 !important}
+    .subjects{grid-template-columns:1fr}
+  }
+  @media print{
+    section{padding:32px 0;break-inside:avoid}
+    .hero,.ox,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
+  /* ===== Interactive additions ===== */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s,transform .3s}
+  .nav.scrolled{background:rgba(15,26,51,.92);backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav .brand{font-family:Fraunces,serif;font-weight:700;color:#fff;text-decoration:none;font-size:20px}
+  .nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+  .nav a.link{color:#c9d4ea;text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
+  .nav a.link:hover,.nav a.link.active{color:#fff;background:rgba(255,255,255,.1)}
+  .nav-toggle{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+  #starfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .typed{color:#fff;font-weight:500}
+  .caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .scroll-hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:#aebbd6;font-size:13px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .scroll-hint span{display:block;width:22px;height:34px;border:2px solid #aebbd6;border-radius:12px;position:relative}
+  .scroll-hint span::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:#aebbd6;animation:wheel 1.8s infinite}
+  @keyframes wheel{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(10px)}}
+
+  .stats{background:var(--card);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:34px;padding-bottom:34px;text-align:center}
+  .stat b{display:block;font-family:Fraunces,serif;font-size:44px;line-height:1;color:var(--ink)}
+  .stat b small{font-size:24px;color:var(--accent)}
+  .stat > span{color:var(--muted);font-size:14px}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  .card,.trait,.goal,.panel{transition:transform .25s ease,box-shadow .25s ease}
+  .card:hover,.trait:hover,.panel:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,33,61,.10)}
+
+  .chip{cursor:pointer;border:0;font-family:inherit;color:var(--ink);transition:background .2s,transform .2s}
+  .chip:hover{transform:translateY(-2px)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+  .chip-info{margin-top:14px;min-height:52px;padding:12px 16px;border-radius:12px;background:var(--accent-soft);color:var(--ink);font-size:15px;opacity:0;transition:opacity .3s}
+  .chip-info.show{opacity:1}
+
+  .gallery figure{cursor:zoom-in}
+  .gallery figure img{transition:transform .5s ease}
+  .gallery figure:hover img{transform:scale(1.05)}
+  .lightbox{position:fixed;inset:0;background:rgba(6,10,22,.94);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;padding:30px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-height:80vh;max-width:90vw;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lightbox p{color:#e6ecf7;margin:16px 0 0;font-size:16px}
+  .lb-btn{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;width:52px;height:52px;border-radius:50%;font-size:24px;cursor:pointer}
+  .lb-btn:hover{background:rgba(255,255,255,.25)}
+  .lb-prev{left:24px;top:50%;transform:translateY(-50%)} .lb-next{right:24px;top:50%;transform:translateY(-50%)} .lb-close{right:24px;top:24px}
+
+  .term-section{background:var(--paper)}
+  .terminal{margin-top:28px;background:#0b1224;border-radius:16px;overflow:hidden;box-shadow:0 24px 50px rgba(15,26,51,.25);font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px}
+  .term-bar{background:#1a2440;padding:12px 16px;display:flex;gap:8px;align-items:center}
+  .term-bar i{width:12px;height:12px;border-radius:50%;display:block}
+  .term-bar small{color:#8b97b3;margin-left:10px;font-family:Inter,sans-serif}
+  .term-body{padding:20px;height:340px;overflow-y:auto;color:#d6e2ff;line-height:1.6}
+  .term-body .p{color:#7ee0a3} .term-body .k{color:#ffb07a} .term-body .m{color:#8b97b3}
+  .term-body a{color:#9cc3ff}
+  .term-input{display:flex;gap:8px;align-items:center}
+  .term-input input{flex:1;background:transparent;border:0;outline:0;color:#fff;font:inherit;caret-color:var(--accent)}
+  .term-hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .term-hints button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:"SF Mono",Menlo,monospace;font-size:13px;cursor:pointer;color:var(--ink)}
+  .term-hints button:hover{background:var(--ink);color:#fff}
+
+  .to-top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:0;font-size:22px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
+  .to-top.show{opacity:1;pointer-events:auto}
+
+  @media (max-width:860px){
+    .nav ul{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:rgba(15,26,51,.97);padding:10px 20px 18px}
+    .nav ul.open{display:flex}
+    .nav-toggle{display:block}
+    .stats .wrap{grid-template-columns:repeat(2,1fr)}
+    .lb-prev,.lb-next{top:auto;bottom:24px;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+  .pdf .nav,.pdf .to-top,.pdf .scroll-hint,.pdf #terminal,.pdf .lightbox{display:none!important}
+  .pdf .reveal{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Aryan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <ul id="navList">
+      <li><a class="link" href="#about">About</a></li>
+      <li><a class="link" href="#projects">Projects</a></li>
+      <li><a class="link" href="#oxford">Oxford</a></li>
+      <li><a class="link" href="#terminal">Terminal</a></li>
+      <li><a class="link" href="#learning">How I work</a></li>
+      <li><a class="link" href="#goals">Goals</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Portfolio</div>
+      <h1>Aryan</h1>
+      <div class="role">I'm a <span class="typed" id="typed">young coder</span><span class="caret" aria-hidden="true"></span></div>
+      <div class="tags">
+        <span class="tag">Coding &amp; Computer Science</span>
+        <span class="tag">Quantum Physics</span>
+        <span class="tag">Astrophysics</span>
+        <span class="tag">Neuroscience</span>
+        <span class="tag">Music</span>
+      </div>
+      <blockquote class="motto">“Trust me, support me, I can make wonders.”<cite>— Aryan</cite></blockquote>
+    </div>
+    <div class="portrait"><img src="img/profile.jpg" alt="Portrait of Aryan smiling, wearing a light blue blazer"></div>
+  </div>
+  <a class="scroll-hint" href="#about"><span></span>Scroll</a>
+</header>
+<div class="stats">
+  <div class="wrap">
+    <div class="stat reveal"><b><span data-count="12">12</span></b><span>my age when I built my first app</span></div>
+    <div class="stat reveal"><b>Global</b><span>media coverage for Companion</span></div>
+    <div class="stat reveal"><b><span data-count="2">2</span></b><span>articles in Dartford Living</span></div>
+    <div class="stat reveal"><b>Oxford</b><span>Dark Matter Day, Department of Physics</span></div>
+  </div>
+</div>
+
+<main>
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About me</div>
+    <h2 class="reveal">A calm, curious mind</h2>
+    <div class="about-grid">
+      <div>
+        <p class="lead">I'm Aryan, an 18-year-old autistic young man. I'm calm and quiet, and unique in my own way. I love coding and music, and I like to think beyond the box and explore new ideas.</p>
+        <p>My curiosity takes me from writing software to the biggest questions in science: how the quantum world behaves, what the universe is made of, and how the brain works. My dream is to become a scientist and a coder.</p>
+        <div class="interests" id="chips">
+          <button class="chip" data-info="Coding lets me turn my ideas into real apps that people can use.">💻 Coding</button>
+          <button class="chip" data-info="I'm fascinated by how the quantum world behaves, where tiny particles follow surprising rules.">⚛️ Quantum physics</button>
+          <button class="chip" data-info="I love the big questions about the universe, like what dark matter is.">🌌 Astrophysics</button>
+          <button class="chip" data-info="I want to understand how the brain works and how we think.">🧠 Neuroscience</button>
+          <button class="chip" data-info="Music helps me feel calm, and I love listening to it.">🎧 Music</button>
+          <button class="chip" data-info="I love eating out!">🍽️ Eating out</button>
+        </div>
+        <div class="chip-info" id="chipInfo" aria-live="polite"></div>
+      </div>
+      <div class="traits">
+        <div class="reveal trait"><b>Curious</b><span>Always asking how and why</span></div>
+        <div class="reveal trait"><b>Creative thinker</b><span>Finds original solutions</span></div>
+        <div class="reveal trait"><b>Calm &amp; focused</b><span>Thrives in quiet spaces</span></div>
+        <div class="reveal trait"><b>Builder</b><span>Turns ideas into working apps</span></div>
+        <div class="reveal trait"><b>Writer</b><span>Published in my local magazine</span></div>
+        <div class="reveal trait"><b>Science lover</b><span>I ask questions scientists remember</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Coding projects</div>
+    <h2 class="reveal">Apps I have built</h2>
+    <p class="lead">I started building real apps as a child. My first big project helped other autistic children to communicate.</p>
+    <div class="reveal cards">
+      <article class="reveal card feature">
+        <span class="badge">Built at age 12 · Covered by media worldwide</span>
+        <div class="num">01</div>
+        <h3>Companion — a communication app</h3>
+        <p>When I was 12, I developed <b>Companion</b>, a communication app for autistic children. My work was covered by media around the world, including the <i>Times of India</i>, which reported on my app for autistic children.</p>
+        <div class="links"><a class="btn" href="https://timesofindia.indiatimes.com/education/news/gurgaon-boy-develops-app-for-autistic-children/articleshow/88872259.cms" target="_blank" rel="noopener">Read the Times of India article</a></div>
+      </article>
+      <article class="reveal card">
+        <div class="num">02</div>
+        <h3>Weather App</h3>
+        <p>A web app I built that fetches the weather at the press of a button. It is published on GitHub Pages and works on phones as well as computers.</p>
+        <div class="links"><a class="btn" href="https://aryand06.github.io/Weather-app/" target="_blank" rel="noopener">Try the app</a></div>
+      </article>
+      <article class="reveal card">
+        <div class="num">03</div>
+        <h3>And many more</h3>
+        <p>I have developed many other applications, and I keep coding to explore new ideas. Coding is both a creative outlet and a skill for me.</p>
+        <div class="links"><a class="btn ghost" href="https://github.com/aryand06" target="_blank" rel="noopener">GitHub: aryand06</a></div>
+      </article>
+      <article class="reveal card feature" style="background:var(--card)">
+        <div class="num">04</div>
+        <h3>Published writer</h3>
+        <p>I have written articles for <b>Dartford Living</b>, my local community magazine.</p>
+        <div class="links">
+          <a class="btn ghost" href="https://issuu.com/dartfordliving/docs/dartford_living_january_26" target="_blank" rel="noopener">January 2026 issue</a>
+          <a class="btn ghost" href="https://issuu.com/dartfordliving/docs/dartford_living_october_26/10" target="_blank" rel="noopener">October 2026 issue</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="oxford" class="ox">
+  <div class="wrap">
+    <div class="eyebrow">Science in the real world</div>
+    <h2 class="reveal">Dark Matter Day at the University of Oxford</h2>
+    <p class="lead">I attended Dark Matter Day at the University of Oxford's Department of Physics. I listened to talks by research physicists, explored the experiments on display and met the scientists behind them. I asked lots of questions, and the speakers loved them.</p>
+    <div class="gallery">
+      <figure class="g1"><img src="img/lecture.jpg" alt="Aryan listening to a lecture, wearing headphones"><figcaption>Following the lectures</figcaption></figure>
+      <figure class="g2"><img src="img/experiment.jpg" alt="Aryan at a demonstration table with a physicist explaining an experiment"><figcaption>Exploring the experiments with a physicist</figcaption></figure>
+      <figure class="g3"><img src="img/scientist.jpg" alt="Aryan standing with a scientist in front of Particle Physics at Oxford banners"><figcaption>Meeting a scientist</figcaption></figure>
+      <figure class="g4"><img src="img/talk.jpg" alt="Slide: Quantum Enhanced Superfluid Technologies for Dark Matter and Cosmology, Robert Smith"><figcaption>Talk: quantum technologies for dark matter</figcaption></figure>
+      <figure class="g5"><img src="img/note.jpg" alt="Handwritten note: Thank you Aryan! Your questions were fantastic! Rob Smith"><figcaption>A note from the speaker</figcaption></figure>
+      <figure class="g6"><img src="img/oxford-night.jpg" alt="Aryan smiling outside the physics building at night"><figcaption>A day to remember</figcaption></figure>
+    </div>
+    <div class="reveal note-quote">
+      <div class="star">✦</div>
+      <div><div class="big">“Thank you Aryan! Your questions were fantastic!”</div><small>Handwritten note from Robert Smith, who gave the talk <i>Quantum Enhanced Superfluid Technologies for Dark Matter &amp; Cosmology</i></small></div>
+    </div>
+  </div>
+</section>
+
+<section id="terminal" class="term-section">
+  <div class="wrap">
+    <div class="eyebrow">Try it yourself</div>
+    <h2 class="reveal">Talk to my terminal</h2>
+    <p class="lead">I'm a coder, so here's a little terminal. Type a command, or tap one of the buttons below.</p>
+    <div class="terminal" id="termBox">
+      <div class="term-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><small>aryan@portfolio: ~</small></div>
+      <div class="term-body" id="termBody">
+        <div class="m">Welcome! Type <span class="k">help</span> to see what I can show you.</div>
+        <div id="termOut"></div>
+        <form class="term-input" id="termForm" autocomplete="off"><span class="p">aryan@portfolio:~$</span><input id="termIn" aria-label="Terminal command" spellcheck="false"></form>
+      </div>
+    </div>
+    <div class="term-hints">
+      <button data-cmd="help">help</button><button data-cmd="about">about</button><button data-cmd="projects">projects</button><button data-cmd="oxford">oxford</button><button data-cmd="goals">goals</button><button data-cmd="motto">motto</button><button data-cmd="clear">clear</button>
+    </div>
+  </div>
+</section>
+
+<section id="learning">
+  <div class="wrap">
+    <div class="eyebrow">Learning &amp; support</div>
+    <h2 class="reveal">Where I am now, and how I thrive</h2>
+    <div class="two">
+      <div class="reveal panel">
+        <h3>Currently studying</h3>
+        <p style="margin-top:0;color:var(--ink-soft)">I'm preparing for my Functional Skills exams, studying at home with my family's support.</p>
+        <div class="subjects">
+          <div class="subject">Maths<small>Functional Skills</small></div>
+          <div class="subject">English<small>Functional Skills</small></div>
+          <div class="subject">Digital Technology<small>Functional Skills</small></div>
+        </div>
+        <p style="margin:0;color:var(--ink-soft)">I'm ready for a college that can build on my academic ability and help me go further.</p>
+      </div>
+      <div class="reveal panel">
+        <h3>How I work best</h3>
+        <ul>
+          <li><b>A calm, quiet environment</b> where I can focus</li>
+          <li><b>1:1 support</b> from someone I know and trust</li>
+          <li><b>Time to settle</b> in new places. I do very well in familiar settings, and I need support to carry those skills into new environments.</li>
+          <li><b>Familiar routines and people</b> to bridge the gap between settings</li>
+          <li><b>Music and headphones</b> to help me stay calm and comfortable</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal trust">
+      <div class="icon">✦</div>
+      <p><b>Trust is the key.</b> I can sense whether a person feels confident or doubtful about my ability. When the people around me believe in me, I relax and show my true potential.</p>
+    </div>
+  </div>
+</section>
+
+<section id="goals">
+  <div class="wrap">
+    <div class="eyebrow">Looking ahead</div>
+    <h2 class="reveal">My goals</h2>
+    <div class="goals">
+      <div class="reveal goal"><h3>Become a scientist</h3><p>Keep exploring physics, especially quantum physics, astrophysics and neuroscience, and work towards a future in science.</p></div>
+      <div class="reveal goal"><h3>Grow as a coder</h3><p>Build bigger and better apps, deepen my computer science knowledge and use technology to help people.</p></div>
+      <div class="reveal goal"><h3>Confidence everywhere</h3><p>With the right support, take my skills from familiar settings into new ones and grow in independence.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="motto-foot">“Trust me, support me, I can make wonders.”</div>
+    <div>Aryan · Portfolio</div>
+  </div>
+</footer>
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">›</button>
+</div>
+<script>
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isPdf=document.documentElement.classList.contains('pdf');
+
+  /* Starfield */
+  var c=document.getElementById('starfield');
+  if(c&&c.getContext){
+    var ctx=c.getContext('2d'),stars=[],W,H,dpr=window.devicePixelRatio||1,mx=0,my=0;
+    function size(){var r=c.parentElement.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+      stars=[];var n=Math.round(W*H/5000);for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,p:Math.random()*Math.PI*2,s:Math.random()*.02+.005,d:Math.random()*.6+.2});}
+    function draw(t){ctx.clearRect(0,0,W,H);
+      for(var i=0;i<stars.length;i++){var st=stars[i];var a=reduce?.7:.35+.65*Math.abs(Math.sin(st.p+t*st.s*.06));
+        ctx.globalAlpha=a;ctx.fillStyle=i%9===0?'#ffd2b0':'#ffffff';ctx.beginPath();ctx.arc(st.x+mx*st.d,st.y+my*st.d,st.r,0,6.283);ctx.fill();}
+      ctx.globalAlpha=1;if(!reduce&&!isPdf)requestAnimationFrame(draw);}
+    size();window.addEventListener('resize',size);draw(0);
+    if(!reduce)document.querySelector('.hero').addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*-20;my=(e.clientY/window.innerHeight-.5)*-20;});
+  }
+
+  /* Typing effect */
+  var words=['young coder','app developer','future scientist','curious thinker','music lover'],el=document.getElementById('typed');
+  if(el&&!reduce&&!isPdf){var wi=0,ci=words[0].length,del=true;
+    (function tick(){var w=words[wi];
+      if(del){ci--;if(ci<0){del=false;wi=(wi+1)%words.length;ci=0;}}
+      else{ci++;if(ci>words[wi].length){del=true;setTimeout(tick,1800);return;}}
+      el.textContent=words[wi].slice(0,Math.max(ci,0));setTimeout(tick,del?45:85);})();
+  }
+
+  /* Nav */
+  var nav=document.getElementById('nav'),toTop=document.getElementById('toTop');
+  function onScroll(){var y=window.scrollY;nav.classList.toggle('scrolled',y>40);toTop.classList.toggle('show',y>700);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
+  var tog=document.getElementById('navToggle'),list=document.getElementById('navList');
+  tog.addEventListener('click',function(){var o=list.classList.toggle('open');tog.setAttribute('aria-expanded',o);});
+  list.addEventListener('click',function(e){if(e.target.tagName==='A'){list.classList.remove('open');tog.setAttribute('aria-expanded',false);}});
+
+  /* Active section + reveal + count-up */
+  if('IntersectionObserver' in window&&!isPdf){
+    var links={};document.querySelectorAll('.nav a.link').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){for(var k in links)links[k].classList.remove('active');if(links[e.target.id])links[e.target.id].classList.add('active');}});},{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('section[id]').forEach(function(s){so.observe(s);});
+    var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);
+      var n=e.target.querySelector('[data-count]');if(n&&!reduce){var to=+n.dataset.count,i=0;(function up(){i++;n.textContent=Math.min(i,to);if(i<to)setTimeout(up,900/to);})();}}});},{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(r,i){r.style.transitionDelay=(i%3)*90+'ms';ro.observe(r);});
+  } else {document.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});}
+
+  /* Interest chips */
+  var info=document.getElementById('chipInfo');
+  document.querySelectorAll('#chips .chip').forEach(function(b){b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')==='true';
+      document.querySelectorAll('#chips .chip').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      if(on){info.classList.remove('show');return;}
+      b.setAttribute('aria-pressed','true');info.textContent=b.dataset.info;info.classList.add('show');});});
+
+  /* Lightbox */
+  var figs=[].slice.call(document.querySelectorAll('.gallery figure')),lb=document.getElementById('lightbox'),li=document.getElementById('lbImg'),lc=document.getElementById('lbCap'),cur=0,last;
+  function show(i){cur=(i+figs.length)%figs.length;var im=figs[cur].querySelector('img');li.src=im.src;li.alt=im.alt;lc.textContent=figs[cur].querySelector('figcaption').textContent;}
+  function open(i){last=document.activeElement;show(i);lb.classList.add('open');document.getElementById('lbClose').focus();}
+  function close(){lb.classList.remove('open');if(last)last.focus();}
+  figs.forEach(function(f,i){f.tabIndex=0;f.setAttribute('role','button');f.setAttribute('aria-label','Enlarge photo: '+f.querySelector('figcaption').textContent);
+    f.addEventListener('click',function(){open(i);});f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i);}});});
+  document.getElementById('lbClose').onclick=close;document.getElementById('lbPrev').onclick=function(){show(cur-1);};document.getElementById('lbNext').onclick=function(){show(cur+1);};
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+
+  /* Terminal */
+  var out=document.getElementById('termOut'),inp=document.getElementById('termIn'),body=document.getElementById('termBody'),hist=[],hi=0;
+  var C={
+    help:'Commands: <span class="k">about</span>, <span class="k">projects</span>, <span class="k">oxford</span>, <span class="k">skills</span>, <span class="k">goals</span>, <span class="k">motto</span>, <span class="k">contact</span>, <span class="k">clear</span>',
+    about:"I'm Aryan, 18. I'm calm, quiet and curious. I love coding, music, quantum physics, astrophysics and neuroscience.",
+    projects:'<span class="k">Companion</span>: a communication app for autistic children, built when I was 12 and covered by media worldwide.<br><span class="k">Weather App</span>: <a href="https://aryand06.github.io/Weather-app/" target="_blank" rel="noopener">aryand06.github.io/Weather-app</a><br><span class="k">...and many more</span>',
+    oxford:'I went to Dark Matter Day at the University of Oxford\'s Department of Physics. The speaker Robert Smith wrote: "Your questions were fantastic!"',
+    skills:'Coding and app development · Writing (published in Dartford Living) · Asking good questions · Studying Functional Skills Maths, English and Digital Technology',
+    goals:'1. Become a scientist<br>2. Grow as a coder<br>3. Feel confident in new places, with the right support',
+    motto:'<span class="k">"Trust me, support me, I can make wonders."</span>',
+    contact:'Please get in touch through my family.',
+    hello:'Hello! Nice to meet you 👋', hi:'Hi there! Type <span class="k">help</span> to explore.',
+    sudo:'Nice try 😄 Only I have admin rights here.', whoami:'aryan, coder and future scientist',
+    ls:'about.txt  projects/  oxford.jpg  goals.md  motto.txt'
+  };
+  function esc(t){return t.replace(/[&<>"]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+  function run(cmd){cmd=(cmd||'').trim();if(!cmd)return;hist.push(cmd);hi=hist.length;var k=cmd.toLowerCase();
+    if(k==='clear'){out.innerHTML='';return;}
+    var r=C[k]||('Command not found: '+esc(cmd)+'. Type <span class="k">help</span>.');
+    out.insertAdjacentHTML('beforeend','<div><span class="p">aryan@portfolio:~$</span> '+esc(cmd)+'</div><div style="margin-bottom:10px">'+r+'</div>');
+    body.scrollTop=body.scrollHeight;}
+  document.getElementById('termForm').addEventListener('submit',function(e){e.preventDefault();run(inp.value);inp.value='';});
+  inp.addEventListener('keydown',function(e){if(e.key==='ArrowUp'&&hi>0){hi--;inp.value=hist[hi];e.preventDefault();}if(e.key==='ArrowDown'){hi=Math.min(hist.length,hi+1);inp.value=hist[hi]||'';e.preventDefault();}});
+  document.getElementById('termBox').addEventListener('click',function(e){if(e.target.tagName!=='A')inp.focus({preventScroll:true});});
+  document.querySelectorAll('.term-hints button').forEach(function(b){b.addEventListener('click',function(){run(b.dataset.cmd);});});
+})();
+</script>
+</body>
+</html>
